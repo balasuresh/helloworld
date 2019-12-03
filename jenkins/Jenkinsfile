@@ -1,0 +1,60 @@
+pipeline {
+    
+    agent any
+    
+    stages {
+    
+        stage('git checkout') {
+        }
+
+        stage('compile') {
+        }
+
+    	stage('sonar quality check')
+    	{
+		echo "Quality check & code coverage"	    
+		}
+		
+		stage('sonar quality gate check')
+    	{
+		echo "Quality check & code coverage"	    
+		}
+		
+		stage('Package')
+		{
+		echo "package skip tests"
+		}
+		
+		stage('Build Docker Image')
+		{  
+		echo "Build Docker image with versioning"
+    	}
+    	
+    	stage('Publish Docker image to Nexus')
+		{  
+		echo "Build Docker image with versioning"
+    	}
+    	
+    	stage('deploy to Integration enveronments')
+		{
+		echo "Deploy to Integration enveronment"
+    	}
+    	
+    	stage('deploy to Prod enveronments')
+		{  
+		echo "Deploy to Prod enveronment"
+    	}
+    		
+    }
+    post {
+        success {
+            echo "mail to users"
+            }
+        
+        failure {
+            echo "mail to users"
+        }
+        }
+        
+    
+}
