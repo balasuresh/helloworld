@@ -8,6 +8,7 @@ pipeline {
         }
 
         stage('compile') {
+			sh "mvn compile"
         }
 
     	stage('sonar quality check')
@@ -22,13 +23,16 @@ pipeline {
 		
 		stage('Package')
 		{
+			
 		echo "package skip tests"
 		}
 		
 		stage('Build Docker Image')
 		{  
 		echo "Build Docker image with versioning"
-    	}
+		
+		sh "mvn -Pdockerimage package -DskipTests=true"
+		}
     	
     	stage('Publish Docker image to Nexus')
 		{  
