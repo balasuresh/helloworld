@@ -5,51 +5,76 @@ pipeline {
     stages {
     
         stage('git checkout') {
-			
+			steps
+			{
 			git 'https://github.com/balasuresh/helloworld.git';
-        }
+			}
+		}
 
         stage('compile') {
+			steps
+			{
 			sh "mvn compile"
-        }
+			}
+		}
 
     	stage('sonar quality check')
     	{
+			steps
+			{
 		echo "Quality check & code coverage"	    
+		}
 		}
 		
 		stage('sonar quality gate check')
     	{
+			steps
+			{
 		echo "Quality check & code coverage"	    
+		}
 		}
 		
 		stage('Package')
 		{
-			
+		steps
+			{	
 		echo "package skip tests"
 		}
-		
+		}
+
 		stage('Build Docker Image')
-		{  
+		{
+			steps
+			{  
 		echo "Build Docker image with versioning"
 		
 		sh "mvn -Pdockerimage package -DskipTests=true"
 		}
+		}
     	
     	stage('Publish Docker image to Nexus')
-		{  
+		{
+			steps
+			{  
 		echo "Build Docker image with versioning"
     	}
+		}
     	
     	stage('deploy to Integration enveronments')
 		{
+			steps
+			{
 		echo "Deploy to Integration enveronment"
     	}
+		}
     	
     	stage('deploy to Prod enveronments')
-		{  
+		{
+			steps
+			{  
 		echo "Deploy to Prod enveronment"
     	}
+		}
     		
     }
     post {
