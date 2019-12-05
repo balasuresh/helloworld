@@ -5,6 +5,8 @@ pipeline {
     stages {
     
         stage('git checkout') {
+			
+			git 'https://github.com/balasuresh/helloworld.git';
         }
 
         stage('compile') {
